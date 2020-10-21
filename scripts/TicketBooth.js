@@ -1,21 +1,38 @@
-const contentTarget = document.querySelector(".entry")
-const eventHub = document.querySelector("#state-fair")
 
-eventHub.addEventListener("rideTicketGenerated", customEvent => {
-    const rideTicket = document.querySelector(".flowerSelection")
-    userChoiceElement.innerHTML = customEvent.detail.selectedFlower
-})
+const contentTarget = document.querySelector(".rides")
+const eventHub = document.querySelector(".state-fair")
+
 
 export const TicketBooth = () => {
     contentTarget.innerHTML = `
-        <div class="ticketBooth">
-            <button id="rideTicket">Ride Ticket</button>
-        </div>
-    `
+    <div class="ticketBooth">
+    <button id="rideTicket">Ride Ticket</button>
+    </div>`
 }
 
-const rideEvent = new CustomEvent("rideTicketPurchased")
 
+
+eventHub.addEventListener("click", clickEvent => {
+    console.log(clickEvent.target)
+    if (clickEvent.target.id === "rideTicket") {
+        console.log("test");}
+    else {console.log(test2)}
+
+    //     const selectedTicket = clickEvent.target.value
+        
+    //     const rideTicketEvent = new CustomEvent("rideTicketPurchased", {
+    //         detail: {
+    //             ticketPurchased: selectedTicket
+    //         }
+    //     })
+    //     console.log(rideTicketEvent);
+    //     eventHub.dispatchEvent(rideTicketEvent)
+    // }
+})
+
+
+// const rideTicket = document.querySelector(".ticketBooth")
+// userChoiceElement.innerHTML = customEvent.detail.ticketPurchased
 
 
 /*FROM STEVEB's FriendList.js example: 
