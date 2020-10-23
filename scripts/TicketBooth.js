@@ -33,6 +33,20 @@ eventHub.addEventListener("click", clickEvent => {
         }
 })
 
+eventHub.addEventListener("click", clickEvent => {
+    // console.log(clickEvent.target)
+    if (clickEvent.target.id === "foodTicket") {
+        const selectedTicket = clickEvent.target.value
+        const foodTicketEvent = new CustomEvent("foodTicketPurchased", {
+            detail: {
+                ticketPurchased: selectedTicket
+            }
+        })
+        // console.log(rideTicketEvent);
+        eventHub.dispatchEvent(foodTicketEvent)
+        }
+})
+
 
 // const rideTicket = document.querySelector(".ticketBooth")
 // userChoiceElement.innerHTML = customEvent.detail.ticketPurchased
