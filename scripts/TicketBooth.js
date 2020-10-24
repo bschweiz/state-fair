@@ -1,7 +1,8 @@
+const eventHub = document.querySelector(".state-fair")
 
 const rideTarget = document.querySelector(".rides")
 const foodTarget = document.querySelector(".food")
-const eventHub = document.querySelector(".state-fair")
+const gameTarget = document.querySelector(".games")
 
 
 export const RideTickets = () => {
@@ -14,6 +15,12 @@ export const FoodTickets = () => {
     foodTarget.innerHTML = `
     <div class="ticketBooth">
     <button id="foodTicket">Food Ticket</button>
+    </div>`
+}
+export const GameTickets = () => {
+    gameTarget.innerHTML = `
+    <div class="ticketBooth">
+    <button id="gameTicket">Game Ticket</button>
     </div>`
 }
 
@@ -44,6 +51,20 @@ eventHub.addEventListener("click", clickEvent => {
         })
         // console.log(rideTicketEvent);
         eventHub.dispatchEvent(foodTicketEvent)
+        }
+})
+
+eventHub.addEventListener("click", clickEvent => {
+    // console.log(clickEvent.target)
+    if (clickEvent.target.id === "gameTicket") {
+        const selectedTicket = clickEvent.target.value
+        const gameTicketEvent = new CustomEvent("gameTicketPurchased", {
+            detail: {
+                ticketPurchased: selectedTicket
+            }
+        })
+        // console.log(rideTicketEvent);
+        eventHub.dispatchEvent(gameTicketEvent)
         }
 })
 
