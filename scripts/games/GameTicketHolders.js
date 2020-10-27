@@ -6,6 +6,6 @@ export const GameTicketHolders = () => {
     eventHub.addEventListener("gameTicketPurchased", incrementBoxes => {
         
         contentTarget.innerHTML += `<div class="person player"></div>`
-        console.log("testing Ride Ticket Holders")
+        console.log("testing GAME Ticket Holders")
     })
 }
