@@ -4,7 +4,7 @@ const rideTarget = document.querySelector(".rides")
 const foodTarget = document.querySelector(".food")
 const gameTarget = document.querySelector(".games")
 const sideshowTarget = document.querySelector(".sideshow")
-
+const fullTarget = document.querySelector(".entry")
 
 export const RideTickets = () => {
     rideTarget.innerHTML = `
@@ -29,6 +29,13 @@ export const SideshowTickets = () => {
     sideshowTarget.innerHTML = `
     <div class="ticketBooth">
     <button id="sideshowTicket">Sideshows Ticket</button>
+    </div>`
+}
+
+export const FullTickets = () => {
+    fullTarget.innerHTML = `
+    <div class="ticketBooth">
+    <button id="fullTicket">Full Package Ticket</button>
     </div>`
 }
 
@@ -81,6 +88,20 @@ eventHub.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "sideshowTicket") {
         const selectedTicket = clickEvent.target.value
         const sideshowTicketEvent = new CustomEvent("sideshowTicketPurchased", {
+            detail: {
+                ticketPurchased: selectedTicket
+            }
+        })
+        // console.log(rideTicketEvent);
+        eventHub.dispatchEvent(sideshowTicketEvent)
+        }
+})
+
+eventHub.addEventListener("click", clickEvent => {
+    // console.log(clickEvent.target)
+    if (clickEvent.target.id === "fullTicket") {
+        const selectedTicket = clickEvent.target.value
+        const sideshowTicketEvent = new CustomEvent("fullTicketPurchased", {
             detail: {
                 ticketPurchased: selectedTicket
             }
