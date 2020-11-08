@@ -5,6 +5,7 @@ const foodTarget = document.querySelector(".food")
 const gameTarget = document.querySelector(".games")
 const sideshowTarget = document.querySelector(".sideshow")
 const fullTarget = document.querySelector(".entry")
+const countTarget = document.querySelector(".customers")
 
 export const RideTickets = () => {
     rideTarget.innerHTML = `
@@ -39,10 +40,20 @@ export const FullTickets = () => {
     </div>`
 }
 
+let stateVar = 0
+
+export const Counter = () => {
+        countTarget.innerHTML = `
+        Total tickets purchased: ${stateVar}`
+        return stateVar     
+    
+}
+
 
 
 eventHub.addEventListener("click", clickEvent => {
-    // console.log(clickEvent.target)
+    stateVar++;
+    Counter();
     if (clickEvent.target.id === "rideTicket") {
         const selectedTicket = clickEvent.target.value
         const rideTicketEvent = new CustomEvent("rideTicketPurchased", {
@@ -50,109 +61,44 @@ eventHub.addEventListener("click", clickEvent => {
                 ticketPurchased: selectedTicket
             }
         })
-        // console.log(rideTicketEvent);
         eventHub.dispatchEvent(rideTicketEvent)
         }
-})
-
-eventHub.addEventListener("click", clickEvent => {
-    // console.log(clickEvent.target)
-    if (clickEvent.target.id === "foodTicket") {
+    else if (clickEvent.target.id === "foodTicket") {
         const selectedTicket = clickEvent.target.value
         const foodTicketEvent = new CustomEvent("foodTicketPurchased", {
             detail: {
                 ticketPurchased: selectedTicket
             }
         })
-        // console.log(rideTicketEvent);
         eventHub.dispatchEvent(foodTicketEvent)
         }
-})
-
-eventHub.addEventListener("click", clickEvent => {
-    // console.log(clickEvent.target)
-    if (clickEvent.target.id === "gameTicket") {
+    else if (clickEvent.target.id === "gameTicket") {
         const selectedTicket = clickEvent.target.value
         const gameTicketEvent = new CustomEvent("gameTicketPurchased", {
             detail: {
                 ticketPurchased: selectedTicket
             }
         })
-        // console.log(rideTicketEvent);
         eventHub.dispatchEvent(gameTicketEvent)
         }
-})
-
-eventHub.addEventListener("click", clickEvent => {
-    // console.log(clickEvent.target)
-    if (clickEvent.target.id === "sideshowTicket") {
+    else if (clickEvent.target.id === "sideshowTicket") {
         const selectedTicket = clickEvent.target.value
         const sideshowTicketEvent = new CustomEvent("sideshowTicketPurchased", {
             detail: {
                 ticketPurchased: selectedTicket
             }
         })
-        // console.log(rideTicketEvent);
         eventHub.dispatchEvent(sideshowTicketEvent)
-        }
-})
-
-eventHub.addEventListener("click", clickEvent => {
-    // console.log(clickEvent.target)
-    if (clickEvent.target.id === "fullTicket") {
+    }
+    else if (clickEvent.target.id === "fullTicket") {
         const selectedTicket = clickEvent.target.value
-        const sideshowTicketEvent = new CustomEvent("fullTicketPurchased", {
+        const fullTicketEvent = new CustomEvent("fullTicketPurchased", {
             detail: {
                 ticketPurchased: selectedTicket
             }
         })
-        // console.log(rideTicketEvent);
-        eventHub.dispatchEvent(sideshowTicketEvent)
+        eventHub.dispatchEvent(fullTicketEvent)
         }
 })
 
 
-// const rideTicket = document.querySelector(".ticketBooth")
-// userChoiceElement.innerHTML = customEvent.detail.ticketPurchased
-
-
-/*FROM STEVEB's FriendList.js example: 
-
-import { useFriends } from "./FriendProvider.js"
-import { Friend } from "./Friend.js"
-
-// DOM element where friends will be rendered
-const contentTarget = document.querySelector(".friends--list")
-const eventHub = document.querySelector(".container")
-
-eventHub.addEventListener("change", changeEvent => {
-    if (changeEvent.target.classList.contains("friend")) {
-        
-        const friendName = changeEvent.target.value
-        
-        const customEvent = new CustomEvent("friendChosen", {
-            detail: {
-                nameOfChosenFriend: friendName
-            }
-        })
-        
-        eventHub.dispatchEvent(customEvent)
-    }
-})
-
-// Function that renders a collection of friends
-const render = friendCollection => {
-    contentTarget.innerHTML = `
-        <fieldset>
-            <legend>FriendList Component</legend>
-            ${ friendCollection.map(Friend).join("") }
-        </fieldset>
-    `
-}
-
-/* COMPONENT FUNCTION 
-export const FriendList = () => {
-    const appStateFriends = useFriends()
-    render(appStateFriends)
-}
-*/
